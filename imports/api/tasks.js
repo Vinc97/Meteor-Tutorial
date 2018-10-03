@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
- import { Mongo } from 'meteor/mongo';
- import { check } from 'meteor/check';
+import { Mongo } from 'meteor/mongo';
+import { check } from 'meteor/check';
  
  export const Tasks = new Mongo.Collection('tasks');
  
@@ -18,6 +18,7 @@ import { Meteor } from 'meteor/meteor';
  }
  
  Meteor.methods({
+
    'tasks.insert'(text) {
      check(text, String);
  
@@ -33,6 +34,7 @@ import { Meteor } from 'meteor/meteor';
        username: Meteor.user().username,
      });
    },
+
   'tasks.remove'(taskId) {
     check(taskId, String);
      const task = Tasks.findOne(taskId);
@@ -42,6 +44,7 @@ import { Meteor } from 'meteor/meteor';
     }
      Tasks.remove(taskId);
   },
+
   'tasks.setChecked'(taskId, setChecked) {
     check(taskId, String);
     check(setChecked, Boolean);
@@ -52,6 +55,7 @@ import { Meteor } from 'meteor/meteor';
     }
      Tasks.update(taskId, { $set: { checked: setChecked } });
   },
+
   'tasks.setPrivate'(taskId, setToPrivate) {
      check(taskId, String);
      check(setToPrivate, Boolean);
